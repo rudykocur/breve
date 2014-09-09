@@ -1,0 +1,166 @@
+test_escaping (breve.tests.tags.SerializationTestCase)
+escaping, xml() directive ... ok
+test_flatten_callable (breve.tests.tags.SerializationTestCase)
+test flattening of callables ... ok
+test_inlineJS (breve.tests.tags.SerializationTestCase)
+inline Javascript flattening ... ok
+test_minJS (breve.tests.tags.SerializationTestCase)
+inline minified Javascript flattening ... ok
+test_tag_multiplication (breve.tests.tags.SerializationTestCase)
+tag multiplication ... ok
+test_tag_serialization (breve.tests.tags.SerializationTestCase)
+basic tag flattening ... ok
+test_test (breve.tests.tags.SerializationTestCase)
+test() function ... ok
+test_unicode (breve.tests.tags.SerializationTestCase)
+unicode and string coercion ... FAIL
+test_unicode_attributes (breve.tests.tags.SerializationTestCase)
+unicode and string coercion in attributes ... ok
+test_assign (breve.tests.tags.MacrosTestCase)
+assign directive ... ok
+test_assign_with_macro (breve.tests.tags.MacrosTestCase)
+assign directive with macro ... ok
+test_let (breve.tests.tags.MacrosTestCase)
+let directive ... ok
+test_macros (breve.tests.tags.MacrosTestCase)
+test macros ... ok
+test_nested_macros (breve.tests.tags.MacrosTestCase)
+test nested macros ... ok
+test_tag_multiplication_with_macro (breve.tests.tags.MacrosTestCase)
+tag multiplication including macro ... ok
+test_dom_traversal (breve.tests.tags.DOMTestCase)
+tag.walk() DOM traversal ... ok
+test_dom_traversal_from_macro (breve.tests.tags.DOMTestCase)
+macro abuse: self-traversing template ... FAIL
+test_auto_tags (breve.tests.tags.CustomTagsTestCase)
+test AutoTag class ... ok
+test_custom_tags (breve.tests.tags.CustomTagsTestCase)
+custom tags ... ok
+test_dynamic_tags (breve.tests.tags.CustomTagsTestCase)
+test dynamic creation of tags ... ok
+test_assign_scope (breve.tests.templates.TemplateTestCase)
+test assign directive's scope ... ok
+test_custom_loader (breve.tests.templates.TemplateTestCase)
+custom loader ... ok
+test_custom_loader_stack (breve.tests.templates.TemplateTestCase)
+custom loader stack ... ok
+test_custom_renderer (breve.tests.templates.TemplateTestCase)
+custom renderer ... ok
+test_custom_renderer_notag (breve.tests.templates.TemplateTestCase)
+custom renderer returning non-Tag type ... ok
+test_encoding (breve.tests.templates.TemplateTestCase)
+encoding comments ... FAIL
+test_include (breve.tests.templates.TemplateTestCase)
+include() directive ... ok
+test_include_macros (breve.tests.templates.TemplateTestCase)
+define macros via include() directive ... ok
+test_instantiation_parameters (breve.tests.templates.TemplateTestCase)
+test instantiation parameters ... .\breve\tests\templates.py:31: DeprecationWarning: Please use assertTrue instead.
+  self.failUnless ( getattr ( t, k ) == v )
+ok
+test_let_directive (breve.tests.templates.TemplateTestCase)
+test let directive ... ok
+test_let_directive_scope (breve.tests.templates.TemplateTestCase)
+test let directive's scope ... .\breve\tests\templates.py:158: DeprecationWarning: Please use assertRaises instead.
+  t.render, 'index', vars, namespace = 'v'
+ok
+test_loop_include (breve.tests.templates.TemplateTestCase)
+looping over include() with listcomp ... ok
+test_loop_macros (breve.tests.templates.TemplateTestCase)
+loop using macro ... ok
+test_macro_includes (breve.tests.templates.TemplateTestCase)
+include() directive inside macro ... ok
+test_macros_inside_inherits (breve.tests.templates.TemplateTestCase)
+test macros inside inherits(): scope issues ... ok
+test_nested_include (breve.tests.templates.TemplateTestCase)
+nested include() directives ... ok
+test_nested_include_macros (breve.tests.templates.TemplateTestCase)
+define macros inside nested include() directives ... ok
+test_nested_inheritance (breve.tests.templates.TemplateTestCase)
+nested inheritance ... ok
+test_register_flattener (breve.tests.templates.TemplateTestCase)
+register_flattener() function ... ok
+test_register_global (breve.tests.templates.TemplateTestCase)
+register_global() function ... ok
+test_render_parameters (breve.tests.templates.TemplateTestCase)
+test render-time parameters ... ok
+test_simple_inheritance (breve.tests.templates.TemplateTestCase)
+simple inheritance ... ok
+test_simple_template (breve.tests.templates.TemplateTestCase)
+simple template ... FAIL
+test_stacks (breve.tests.templates.TemplateTestCase)
+test stacks (push/pop) ... ok
+test_stacks_template (breve.tests.templates.TemplateTestCase)
+test stacks in template ... ok
+test_autolist_macro (breve.tests.macros.MacrosTestCase)
+test autolist macro ... ok
+test_autolist_macro2 (breve.tests.macros.MacrosTestCase)
+test autolist macro ... FAIL
+test_autotable_macro (breve.tests.macros.MacrosTestCase)
+test autotable macro ... ok
+test_toc_macro (breve.tests.macros.MacrosTestCase)
+test table-of-contents macro ... ok
+test_render_decorator (breve.tests.tools.PluginHelpersTestCase)
+test helpers.render_decorator ... ok
+
+======================================================================
+FAIL: test_unicode (breve.tests.tags.SerializationTestCase)
+unicode and string coercion
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File ".\breve\tests\tags.py", line 92, in test_unicode
+    ( u'<html><head><title>test_unicode</title></head>'
+AssertionError: '<html><head><title>test_unicode</title></head><body>Brev\xc3© converts plain strin [truncated]... != '<html><head><title>test_unicode</title></head><body>BrevÈ converts plain string [truncated]...
+- <html><head><title>test_unicode</title></head><body>Brev\xc3© converts plain strings<br />BrevÈ handles unicode strings<br /><div>‰\xe5\xe5? \u25b8 <em>\u044f \u043d\u0435 \u043f\u043e\u043d\u0438\u043c\u0430\u044e</em>\u25b8 3 km\xb2</div></body></html>
+?                                                         ^^
++ <html><head><title>test_unicode</title></head><body>BrevÈ converts plain strings<br />BrevÈ handles unicode strings<br /><div>‰\xe5\xe5? \u25b8 <em>\u044f \u043d\u0435 \u043f\u043e\u043d\u0438\u043c\u0430\u044e</em>\u25b8 3 km\xb2</div></body></html>
+?                                                         ^
+
+
+======================================================================
+FAIL: test_dom_traversal_from_macro (breve.tests.tags.DOMTestCase)
+macro abuse: self-traversing template
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File ".\breve\tests\tags.py", line 434, in test_dom_traversal_from_macro
+    ( u'<html><head><title>macro madness</title></head>'
+AssertionError: '<html><head><title>macro madness</title></head><body><div id="main-content" cla [truncated]... != '<html><head><title>macro madness</title></head><body><div class="text" id="main [truncated]...
+- <html><head><title>macro madness</title></head><body><div id="main-content" class="text"><img src="/images/breve-logo.png" alt="breve logo"></img><br /><span class="bold">Hello from Breve!</span></div><pre>div#main-content { }
+- div.text { }
++ <html><head><title>macro madness</title></head><body><div class="text" id="main-content"><img src="/images/breve-logo.png" alt="breve logo"></img><br /><span class="bold">Hello from Breve!</span></div><pre>div.text { }
++ div#main-content { }
+  span.bold { }</pre></body></html>
+
+======================================================================
+FAIL: test_encoding (breve.tests.templates.TemplateTestCase)
+encoding comments
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File ".\breve\tests\templates.py", line 514, in test_encoding
+    self.assertNotEqual ( actual, expected )
+AssertionError: '<?xml version="1.0" encoding="UTF-8"?>\n\n<html><head><title>test_encoding</title></head><body>A test with sp√©c√\xad√°l ch√•r√\xa0ct√´rs in it.</body></html>' == '<?xml version="1.0" encoding="UTF-8"?>\n\n<html><head><title>test_encoding</title></head><body>A test with sp√©c√\xad√°l ch√•r√\xa0ct√´rs in it.</body></html>'
+
+======================================================================
+FAIL: test_simple_template (breve.tests.templates.TemplateTestCase)
+simple template
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File ".\breve\tests\templates.py", line 65, in test_simple_template
+    self.assertEqual ( actual, expected )
+AssertionError: '<?xml version="1.0" encoding="UTF-8"?>\n\n<html><head><title>test_simple_templa [truncated]... != '<?xml version="1.0" encoding="UTF-8"?>\n\n<html><head><title>test_simple_templa [truncated]...
+Diff is 1143 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_autolist_macro2 (breve.tests.macros.MacrosTestCase)
+test autolist macro
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File ".\breve\tests\macros.py", line 135, in test_autolist_macro2
+    ( u'<html><head><title>test_autolist_macro</title></head>'
+AssertionError: '<html><head><title>test_autolist_macro2</title></head><body><ul class="autolist [truncated]... != '<html><head><title>test_autolist_macro</title></head><body><ul class="autolist  [truncated]...
+Diff is 1008 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.055s
+
+FAILED (failures=5)
