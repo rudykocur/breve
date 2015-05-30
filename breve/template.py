@@ -3,10 +3,10 @@
 import sys
 import types
 
-from breve.util import Namespace, caller, PrettyPrinter
-from breve.tags import Proto, Tag, xml, invisible, cdata, comment, conditionals, test, macro, assign, let, AutoTag
+from breve.util import Namespace, caller
+from breve.tags import Tag, xml, invisible, cdata, comment, conditionals, test, macro, assign, let, AutoTag
 from breve.tags.entities import entities
-from breve.flatten import flatten, register_flattener, registry
+from breve.flatten import flatten
 from breve.loaders import FileLoader
 from breve.cache import Cache
 from breve.globals import get_globals, push, pop
@@ -31,15 +31,16 @@ class Template(object):
     loaders = [_loader]
 
     def _update_params(T, **kw):
-        for _a in ( 'tidy', 'debug', 'namespace', 'mashup_entities', 'extension', 'autotags', 'cgitb' ):
+        for _a in ('tidy', 'debug', 'namespace', 'mashup_entities', 'extension', 'autotags', 'cgitb'):
             setattr(T, _a, kw.get(_a, getattr(T, _a)))
 
+    # noinspection PyPep8Naming,PyMethodParameters
     def __init__(T, tags, root='.', xmlns=None, doctype=None, **kw):
-        '''
+        """
         Uses "T" rather than "self" to avoid confusion with
         subclasses that refer to this class via scoping (see
         the "inherits" class for one example).
-        '''
+        """
         T._update_params(**kw)
 
         class inherits(Tag):
@@ -64,8 +65,8 @@ class Template(object):
                     return u''.join([flatten(c) for c in self.children])
                 return u''
 
-        def preamble(**kw):
-            T.__dict__.update(kw)
+        def preamble(**kwargs):
+            T.__dict__.update(kwargs)
             return ''
 
         T.root = root
@@ -99,21 +100,23 @@ class Template(object):
         if T.autotags:
             T.tags[T.autotags] = AutoTag()
 
+    # noinspection PyShadowingBuiltins,PyPep8Naming,PyMethodParameters
     def include(T, template, vars=None, loader=None):
-        ''' 
-        evalutes template fragment(s) in the current (caller's) context
-        '''
+        """
+        evaluates template fragment(s) in the current (caller's) context
+        """
         # if type (template) is types.StringType:
         if isinstance(template, str):
             template = [template]
 
         results = []
         for tpl in template:
+            # noinspection PyShadowingBuiltins
             locals = {}
             if vars:
                 locals.update(vars)
             frame = caller()
-            filename = "%s.%s" % ( tpl, T.extension )
+            filename = "%s.%s" % (tpl, T.extension)
             if loader:
                 T.loaders.append(loader)
             try:
@@ -127,7 +130,7 @@ class Template(object):
 
     # def old_include ( T, template, vars = None, loader = None ):
     # '''
-    #     evalutes a template fragment in the current (caller's) context
+    #     evaluates a template fragment in the current (caller's) context
     #     '''
     #     locals = { }
     #     if vars:
@@ -144,8 +147,9 @@ class Template(object):
     #             T.loaders.pop ( )
     #     return result
 
+    # noinspection PyPep8Naming,PyPep8Naming,PyMethodParameters,PyProtectedMember,PyShadowingBuiltins
     def _evaluate(T, template, fragments=None, vars=None, loader=None, **kw):
-        filename = "%s.%s" % ( template, T.extension )
+        filename = "%s.%s" % (template, T.extension)
         output = u''
 
         T._update_params(**kw)
@@ -186,7 +190,9 @@ class Template(object):
 
         return result
 
+    # noinspection PyPep8Naming,PyPep8Naming,PyMethodParameters,PyShadowingBuiltins
     def render_partial(T, template, fragments=None, vars=None, loader=None, **kw):
+        # noinspection PyBroadException
         try:
             result = T._evaluate(template, fragments, vars, loader, **kw)
             output = flatten(result)
@@ -211,6 +217,7 @@ class Template(object):
             # return p.parse ( output )
             return output
 
+    # noinspection PyPep8Naming,PyPep8Naming,PyMethodParameters,PyShadowingBuiltins
     def render(T, template, vars=None, loader=None, fragment=False, **kw):
         if loader:
             T.loaders.append(loader)
@@ -221,25 +228,29 @@ class Template(object):
             return output
         return u'\n'.join([T.xml_encoding or u'', T.doctype or u'', output])
 
+    # noinspection PyPep8Naming,PyPep8Naming,PyMethodParameters,PyMethodMayBeStatic,PyUnusedLocal
     def debug_out(T, exc_info, filename):
-        import cgitb;
+        import cgitb
 
         cgitb.enable()
         raise Exception()
 
-        ( etype, evalue ) = exc_info
+        # noinspection PyUnreachableCode
+        (etype, evalue) = exc_info
 
         exception = [
             '<span class="template_exception">',
             'Error in template: %s %s: %s' %
-            ( filename,
-              pydoc.html.escape(str(etype)),
-              pydoc.html.escape(str(evalue)) )
+            (filename,
+             pydoc.html.escape(str(etype)),
+             pydoc.html.escape(str(evalue)))
         ]
+        # noinspection PyUnresolvedReferences
         if type(evalue) is types.InstanceType:
             for name in dir(evalue):
-                if name[:1] == '_' or name == 'args': continue
+                if name[:1] == '_' or name == 'args':
+                    continue
                 value = pydoc.html.repr(getattr(evalue, name))
-                exception.append('\n<br />%s&nbsp;=\n%s' % ( name, value ))
+                exception.append('\n<br />%s&nbsp;=\n%s' % (name, value))
         exception.append('</span>')
         return xml(''.join(exception))

@@ -2,3 +2,4 @@
 *.pyo
 Breve.egg-info/
 dist/
+.idea

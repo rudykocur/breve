@@ -41,7 +41,7 @@ setup (
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
     keywords = [ 'python.templating.engines' ],        
-    install_requires = [ ],
+    install_requires = [ 'django',],
     scripts = [ 'tools/soup2breve', 'tools/html2breve', 'tools/xsd2breve', 'tools/breve_server/breve_server' ],
     packages = find_packages ( ),
     zip_safe = True,

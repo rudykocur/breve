@@ -3,6 +3,7 @@ from string import Template as sTemplate
 
 from breve.util import Namespace, escape, quoteattrs, caller
 from breve.flatten import flatten, register_flattener
+# noinspection PyProtectedMember
 from breve.tags import _conditionals as C
 
 conditionals = dict([
