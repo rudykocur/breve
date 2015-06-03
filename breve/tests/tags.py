@@ -79,7 +79,7 @@ class SerializationTestCase(unittest.TestCase):
         template = T.html[
             T.head[T.title[my_name()]],
             T.body[
-                'Brev\xc3\xa9 converts plain strings', T.br,
+                u'Brev\xe9 converts plain strings', T.br,
                 u'Brev\xe9 handles unicode strings', T.br,
                 T.div["äåå? ▸ ", T.em["я не понимаю"], "▸ 3 km²"]
             ]
@@ -514,14 +514,15 @@ class CustomTagsTestCase(unittest.TestCase):
 
 
 def suite():
-    new_suite = unittest.TestSuite()
+    # noinspection PyShadowingNames
+    suite = unittest.TestSuite()
 
-    new_suite.addTest(unittest.makeSuite(SerializationTestCase, 'test'))
-    new_suite.addTest(unittest.makeSuite(MacrosTestCase, 'test'))
-    new_suite.addTest(unittest.makeSuite(DOMTestCase, 'test'))
-    new_suite.addTest(unittest.makeSuite(CustomTagsTestCase, 'test'))
+    suite.addTest(unittest.makeSuite(SerializationTestCase, 'test'))
+    suite.addTest(unittest.makeSuite(MacrosTestCase, 'test'))
+    suite.addTest(unittest.makeSuite(DOMTestCase, 'test'))
+    suite.addTest(unittest.makeSuite(CustomTagsTestCase, 'test'))
 
-    return new_suite
+    return suite
 
 
 if __name__ == '__main__':

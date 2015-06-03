@@ -6,7 +6,7 @@ Requires BeautifulSoup - http://www.crummy.com/software/BeautifulSoup/
 
 import sys
 import codecs
-from html.entities import entitydefs
+from html.entities import codepoint2name
 
 from bs4 import BeautifulSoup, NavigableString, Comment
 
@@ -20,7 +20,7 @@ CONTENT_NOT_HANDLED = 1  # handler only handled the tag, not the contents
 CONTENT_HANDLED = 2  # handler handled everything
 
 # a dictionary to translate unicode into HTML entities
-codepoint2entity = dict([(c, u'%s[E.%s]%s' % (GUARD, n, GUARD)) for c, n in entitydefs.codepoint2name.iteritems()])
+codepoint2entity = dict([(c, u'%s[E.%s]%s' % (GUARD, n, GUARD)) for c, n in codepoint2name.items()])
 
 # our own version of the beautiful soup parser
 # noinspection PyPep8Naming
@@ -103,7 +103,7 @@ def convert(tag, output, indent=0, handlers=None):
         if hasattr(tag, 'name'):
             # is there are a handler for this tag?
             tag_handled = NOT_HANDLED
-            if handlers and handlers in tag.name:
+            if handlers and tag.name in handlers:
                 tag_handled = handlers[tag.name](tag, output, indent, handlers)
 
             # do we still need to handle the tag?
@@ -112,7 +112,7 @@ def convert(tag, output, indent=0, handlers=None):
                 if hasattr(tag, 'attrs') and tag.attrs:
                     output.append(' ( ')
                     i = 0
-                    for key, val in tag.attrs:
+                    for key, val in tag.attrs.items():
                         if i:
                             output.append(', ')
                         output.append('%s_="%s"' % (key, val))
@@ -173,8 +173,7 @@ def meta_handler(tag, output, indent, handlers):
 
 # convert the specified file using the supplied tag handlers
 def convert_file(filename, handlers):
-    soup = BreveBeautifulSoup(open(filename, 'rU'),
-                              convertEntities=BeautifulSoup.HTML_ENTITIES)
+    soup = BreveBeautifulSoup(open(filename, 'rU'))
     output = []
     convert(soup.html, output, handlers=handlers)
     return output

@@ -1,6 +1,7 @@
 import unittest
 
 
+# noinspection PyUnresolvedReferences
 def testsuite():
     from breve.tests import tags, templates, tools, macros
 

@@ -14,6 +14,7 @@ from breve.flatten import flatten
 from breve.tests.lib import my_name
 
 
+# noinspection PyUnresolvedReferences
 class MacrosTestCase(unittest.TestCase):
     # noinspection PyShadowingNames
     def test_autotable_macro(self):
@@ -98,7 +99,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_autolist_macro2(self):
-        '''test autolist macro'''
+        """test autolist macro"""
 
         sublist1 = ["List 1:%s" % _i for _i in range(3)]
         sublist2 = ["List 2:%s" % _i for _i in range(3, 6)]
@@ -132,7 +133,7 @@ class MacrosTestCase(unittest.TestCase):
         output = flatten(template)
         self.assertEqual(
             output,
-            (u'<html><head><title>test_autolist_macro</title></head>'
+            (u'<html><head><title>test_autolist_macro2</title></head>'
              u'<body><ul class="autolist level-0"><li>Item A</li>'
              u'<li>Item B</li><li>Item C</li><li><ul class="autolist level-1">'
              u'<li>List 1:0</li><li>List 1:1</li><li>List 1:2</li></ul></li>'
@@ -144,7 +145,7 @@ class MacrosTestCase(unittest.TestCase):
         )
 
     def test_toc_macro(self):
-        '''test table-of-contents macro'''
+        """test table-of-contents macro"""
 
         template = (
             assign('TOC', []),
@@ -187,11 +188,12 @@ class MacrosTestCase(unittest.TestCase):
 
 
 def suite():
-    new_suite = unittest.TestSuite()
+    # noinspection PyShadowingNames
+    suite = unittest.TestSuite()
 
-    new_suite.addTest(unittest.makeSuite(MacrosTestCase, 'test'))
+    suite.addTest(unittest.makeSuite(MacrosTestCase, 'test'))
 
-    return new_suite
+    return suite
 
 
 if __name__ == '__main__':

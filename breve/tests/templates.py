@@ -65,6 +65,7 @@ class TemplateTestCase(unittest.TestCase):
         actual = t.render('index', vars, namespace='v')
         expected = expected_output()
         try:
+            self.maxDiff = None
             self.assertEqual(actual, expected)
         except AssertionError:
             diff(actual, expected)
@@ -581,10 +582,11 @@ class TemplateMemoryTestCase(unittest.TestCase):
 
 
 def suite():
-    new_suite = unittest.TestSuite()
-    new_suite.addTest(unittest.makeSuite(TemplateTestCase, 'test'))
+    # noinspection PyShadowingNames
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TemplateTestCase, 'test'))
     # suite.addTest ( unittest.makeSuite ( TemplateMemoryTestCase, 'test' ) )
-    return new_suite
+    return suite
 
 
 if __name__ == '__main__':

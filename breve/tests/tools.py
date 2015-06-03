@@ -13,7 +13,6 @@ from breve.tags.entities import entities
 from breve.flatten import flatten
 
 try:
-    # noinspection PyUnresolvedReferences
     from breve.tools.soup2breve import convert_file, meta_handler
 
     souptests = True
@@ -24,7 +23,7 @@ from breve.tests.lib import diff, test_root, template_root, expected_output
 
 class Soup2BreveTestCase(unittest.TestCase):
     def test_soup2breve(self):
-        ''' round-trip some html '''
+        """ round-trip some html """
 
         breve_source = ''.join(
             convert_file(
@@ -67,6 +66,7 @@ class PluginHelpersTestCase(unittest.TestCase):
 
 
 def suite():
+    # noinspection PyShadowingNames
     suite = unittest.TestSuite()
 
     if souptests:
