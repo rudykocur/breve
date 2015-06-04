@@ -69,6 +69,7 @@ def caller():
     """
     get the execution frame of the caller
     """
+    # noinspection PyProtectedMember
     return sys._getframe(2)
 
 

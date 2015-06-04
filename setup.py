@@ -1,13 +1,15 @@
-import sys; sys.path.insert ( 0, '.' )
+import sys;
+
+sys.path.insert(0, '.')
 import breve
 
 from setuptools import setup, find_packages
 
-setup (
-    name = 'Breve',
-    version = breve.__version__,
-    description = '''An s-expression style template engine.''',
-    long_description = '''
+setup(
+    name='Breve',
+    version=breve.__version__,
+    description='''An s-expression style template engine.''',
+    long_description='''
         Breve is a Python template engine that is designed to be clean and elegant with
         minimal syntax.  Unlike most Python template engines, Breve is implemented as an
         `internal DSL`_ rather than a parser.
@@ -27,11 +29,11 @@ setup (
         .. _Django: http://www.djangoproject.com
         .. _`internal DSL`: http://martinfowler.com/bliki/DomainSpecificLanguage.html
     ''',
-    author = 'Cliff Wells',
-    author_email = 'cliff@develix.com',
-    url = 'http://breve.twisty-industries.com/',
-    download_url = 'http://breve.twisty-industries.com/downloads/',
-    classifiers = [
+    author='Cliff Wells',
+    author_email='cliff@develix.com',
+    url='http://breve.twisty-industries.com/',
+    download_url='http://breve.twisty-industries.com/downloads/',
+    classifiers=[
         'Development Status :: 5 - Production',
         'Environment :: Web Environment',
         'Environment :: Web Environment :: Buffet',
@@ -40,15 +42,14 @@ setup (
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    keywords = [ 'python.templating.engines' ],        
-    install_requires = [ ],
-    scripts = [ 'tools/soup2breve', 'tools/html2breve', 'tools/xsd2breve', 'tools/breve_server/breve_server' ],
-    packages = find_packages ( ),
-    zip_safe = True,
-    entry_points = '''
+    keywords=['python.templating.engines'],
+    install_requires=['django', ],
+    scripts=['tools/soup2breve', 'tools/html2breve', 'tools/xsd2breve', 'tools/breve_server/breve_server'],
+    packages=find_packages(),
+    zip_safe=True,
+    entry_points='''
         [python.templating.engines]
         breve = breve.plugin.buffet:BreveTemplatePlugin
     ''',
-    test_suite = 'breve.tests.testsuite'
+    test_suite='breve.tests.testsuite'
 )
-    
