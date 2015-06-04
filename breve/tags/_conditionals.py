@@ -1,4 +1,5 @@
-class Switch(object):
+# noinspection PyPep8Naming
+class switch(object):
     def __init__(self, value):
         self.value = value
 
@@ -9,7 +10,8 @@ class Switch(object):
         return ''
 
 
-class Case(object):
+# noinspection PyPep8Naming
+class case(object):
     def __init__(self, value=None, default=False):
         self.default = default
         self.value = value
@@ -23,10 +25,11 @@ class Case(object):
         return self
 
 
-default = Case(default=True)
+default = case(default=True)
 
 
-class When(object):
+# noinspection PyPep8Naming
+class when(object):
     def __init__(self, condition):
         self.value = bool(condition)
 
@@ -40,21 +43,21 @@ if __name__ == '__main__':
     x = 5
     username = 'bob'
 
-    print(Switch(x)[
-              Case(1)['x is 1'],
-              Case(2)['x is 2'],
-              Case(3)['x is 3'],
+    print(switch(x)[
+              case(1)['x is 1'],
+              case(2)['x is 2'],
+              case(3)['x is 3'],
               default['x is not in list']
           ])
 
-    print(Switch(bool(username))[
-              Case(True)['%s is logged in' % username],
-              Case(False)['you are not logged in']
+    print(switch(bool(username))[
+              case(True)['%s is logged in' % username],
+              case(False)['you are not logged in']
           ])
 
-    print(When(x == 5)[
+    print(when(x == 5)[
               'x is 5'
           ])
-    print(When(x != 4)[
+    print(when(x != 4)[
               'x is not 4'
           ])

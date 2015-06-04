@@ -19,7 +19,8 @@ def flatten_string(obj):
     return str(obj).encode(settings.DEFAULT_CHARSET)
 
 
-class Loader(object):
+# noinspection PyPep8Naming
+class _loader(object):
     def __init__(self, root, breve_opts=None):
         self.breve_opts = breve_opts or {}
         self.root = root
@@ -82,7 +83,7 @@ class TemplateAdapter(object):
                                                   for name in self.names]))
 
 
-loader = Loader(root=BREVE_ROOT, breve_opts=BREVE_OPTS)
+loader = _loader(root=BREVE_ROOT, breve_opts=BREVE_OPTS)
 
 
 # noinspection PyShadowingBuiltins
