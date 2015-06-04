@@ -65,8 +65,9 @@ class Template(object):
                     return u''.join([flatten(c) for c in self.children])
                 return u''
 
-        def preamble(**kwargs):
-            T.__dict__.update(kwargs)
+        # noinspection PyShadowingNames
+        def preamble(**kw):
+            T.__dict__.update(kw)
             return ''
 
         T.root = root

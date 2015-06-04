@@ -1,4 +1,4 @@
-import sys;
+import sys
 
 sys.path.insert(0, '.')
 import breve
@@ -43,7 +43,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
     keywords=['python.templating.engines'],
-    install_requires=['django', ],
+    install_requires=[],
     scripts=['tools/soup2breve', 'tools/html2breve', 'tools/xsd2breve', 'tools/breve_server/breve_server'],
     packages=find_packages(),
     zip_safe=True,

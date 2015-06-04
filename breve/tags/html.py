@@ -67,7 +67,8 @@ empty_tag_names = [
 ]
 
 
-class InlineJS(str):
+# noinspection PyPep8Naming
+class inlineJS(str):
     def __init__(self, children):
         self.children = children
 
@@ -77,9 +78,10 @@ def flatten_inlineJS(o):
     return u'\n<script type="text/javascript">\n//<![CDATA[\n%s\n//]]></script>\n' % o.children
 
 
-register_flattener(InlineJS, flatten_inlineJS)
+register_flattener(inlineJS, flatten_inlineJS)
 
-class MinJS(str):
+# noinspection PyPep8Naming
+class minJS(str):
     def __init__(self, children):
         self.children = jsmin(children)
 
@@ -88,7 +90,7 @@ def flatten_minJS(o):
     return u'\n<script type="text/javascript">\n//<![CDATA[\n%s\n//]]></script>\n' % o.children
 
 
-register_flattener(MinJS, flatten_minJS)
+register_flattener(minJS, flatten_minJS)
 
 
 # convenience tags
@@ -146,7 +148,7 @@ for t in empty_tag_names:
 tags.update(dict(
     checkbox=checkbox,
     option=option,
-    inlineJS=InlineJS,
-    minJS=MinJS,
+    inlineJS=inlineJS,
+    minJS=minJS,
     lorem_ipsum=lorem_ipsum,
 ))
