@@ -44,7 +44,7 @@ setup(
     ],
     keywords=['python.templating.engines'],
     install_requires=[],
-    scripts=['tools/soup2breve', 'tools/html2breve', 'tools/xsd2breve', 'tools/breve_server/breve_server'],
+    scripts=['tools/breve_server/breve_server'],
     packages=find_packages(),
     zip_safe=True,
     entry_points='''
