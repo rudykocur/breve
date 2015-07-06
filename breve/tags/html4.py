@@ -1,7 +1,7 @@
 from breve.util import quoteattrs
 from breve.flatten import register_flattener
-from breve.tags import EmptyTag, Namespace
-from breve.tags.html import HtmlEmptyProto, empty_tag_names, tags as htmltags
+from breve.tags import Tag, Namespace
+from breve.tags.html import empty_tag_names, HtmlProto, tags as htmltags
 
 xmlns = None
 xml_encoding = None
@@ -9,7 +9,7 @@ doctype = '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "htt
 strict_doctype = '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'''
 
 # a class to handle empty tags in html4 format
-class Html4EmptyTag(EmptyTag):
+class Html4EmptyTag(Tag):
     pass
 
 
@@ -24,7 +24,7 @@ def flatten_empty_html4_tag(o):
 register_flattener(Html4EmptyTag, flatten_empty_html4_tag)
 
 
-class Html4EmptyProto(HtmlEmptyProto):
+class Html4EmptyProto(HtmlProto):
     Class = Html4EmptyTag
     pass
 
